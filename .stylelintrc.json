@@ -1,8 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
-    "color-hex-case": "lower",
-    "color-hex-length": "short",
     "block-no-empty": true,
     "declaration-block-no-duplicate-properties": true,
     "no-descending-specificity": null

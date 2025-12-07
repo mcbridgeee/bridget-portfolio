@@ -1,33 +1,143 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== Quality Gates Setup Script ==="
+echo "=== Eleventy + Quality Gates Setup Script ==="
 
-# 1. Sanity checks
+# 1. Ensure package.json exists
 if [ ! -f package.json ]; then
-  echo "No package.json found. Run 'npm init -y' first, then rerun this script."
-  exit 1
+  echo "No package.json found – running 'npm init -y'..."
+  npm init -y
+else
+  echo "package.json found."
 fi
 
-# 2. Install dev dependencies
-echo "Installing dev dependencies (Prettier, ESLint, Stylelint, Husky, Lighthouse CI)..."
+# 2. Install dev dependencies (includes Eleventy)
+echo "Installing dev dependencies (Eleventy, Prettier, ESLint v8, Stylelint, Husky, Lighthouse CI)..."
 npm install --save-dev \
+  @11ty/eleventy \
   prettier \
-  eslint \
+  eslint@8 \
   stylelint \
   stylelint-config-standard \
   husky \
   @lhci/cli
 
-# 3. Create Prettier config
-echo "Creating .prettierrc and .prettierignore..."
+# 3. Basic Eleventy structure (if missing)
+echo "Ensuring Eleventy structure exists..."
+
+if [ ! -f eleventy.config.js ]; then
+  echo "Creating eleventy.config.js..."
+  cat > eleventy.config.js << 'EOF'
+module.exports = function (_eleventyConfig) {
+  return {
+    dir: {
+      input: "src",
+      includes: "_includes",
+      layouts: "_includes/layouts",
+      output: "_site"
+    },
+    templateFormats: ["njk", "md", "html"]
+  };
+};
+EOF
+else
+  echo "eleventy.config.js already exists – leaving it alone."
+fi
+
+if [ ! -d src ]; then
+  echo "Creating src folder and basic files..."
+  mkdir -p src/_includes/layouts
+
+  cat > src/_includes/layouts/base.njk << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title or "portfolio" }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>{{ title or "portfolio" }}</h1>
+      <nav>
+        <a href="/">home</a>
+      </nav>
+    </header>
+
+    <main>
+      {{ content | safe }}
+    </main>
+
+    <footer>
+      <p>&copy; {{ "now" | date("yyyy") }} bridget</p>
+    </footer>
+  </body>
+</html>
+EOF
+
+  cat > src/index.njk << 'EOF'
+---
+layout: base.njk
+title: "bridget – portfolio"
+---
+
+<section>
+  <h2>coming soon</h2>
+  <p>this is the starter shell for my eleventy site.</p>
+</section>
+EOF
+
+  cat > src/style.css << 'EOF'
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+header,
+main,
+footer {
+  padding: 1.5rem;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+}
+
+footer {
+  border-top: 1px solid #ddd;
+  font-size: 0.875rem;
+  color: #555;
+}
+EOF
+else
+  echo "src folder already exists – not touching your files."
+fi
+
+# 4. Prettier config
+echo "Creating Prettier config..."
 cat > .prettierrc << 'EOF'
 {
   "printWidth": 80,
   "singleQuote": true,
   "trailingComma": "es5",
   "semi": true,
-  "tabWidth": 2
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": ["*.njk"],
+      "options": {
+        "parser": "html"
+      }
+    }
+  ]
 }
 EOF
 
@@ -41,8 +151,8 @@ coverage
 *.min.js
 EOF
 
-# 4. Create ESLint config
-echo "Creating .eslintrc.cjs and .eslintignore..."
+# 5. ESLint config
+echo "Creating ESLint config..."
 cat > .eslintrc.cjs << 'EOF'
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
@@ -72,14 +182,12 @@ dist
 coverage
 EOF
 
-# 5. Create Stylelint config
-echo "Creating .stylelintrc.json and .stylelintignore..."
+# 6. Stylelint config
+echo "Creating Stylelint config..."
 cat > .stylelintrc.json << 'EOF'
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
-    "color-hex-case": "lower",
-    "color-hex-length": "short",
     "block-no-empty": true,
     "declaration-block-no-duplicate-properties": true,
     "no-descending-specificity": null
@@ -93,8 +201,8 @@ _site
 dist
 EOF
 
-# 6. Lighthouse CI config
-echo "Creating lighthouserc.json..."
+# 7. Lighthouse CI config
+echo "Creating Lighthouse CI config..."
 cat > lighthouserc.json << 'EOF'
 {
   "ci": {
@@ -113,7 +221,7 @@ cat > lighthouserc.json << 'EOF'
 }
 EOF
 
-# 7. Update package.json scripts using Node (no jq dependency)
+# 8. Update package.json scripts
 echo "Updating package.json scripts..."
 node << 'NODE'
 const fs = require('fs');
@@ -123,7 +231,6 @@ const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
 pkg.scripts = pkg.scripts || {};
 
-// Only set defaults if they aren't already there
 if (!pkg.scripts.dev) {
   pkg.scripts.dev = "npx eleventy --serve --quiet";
 }
@@ -131,36 +238,31 @@ if (!pkg.scripts.build) {
   pkg.scripts.build = "ELEVENTY_ENV=production npx eleventy";
 }
 
-pkg.scripts.format = pkg.scripts.format || "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md,json,njk,html}\"";
-pkg.scripts["format:check"] = pkg.scripts["format:check"] || "prettier --check \"**/*.{js,jsx,ts,tsx,css,scss,md,json,njk,html}\"";
-pkg.scripts["lint:js"] = pkg.scripts["lint:js"] || "eslint .";
-pkg.scripts["lint:css"] = pkg.scripts["lint:css"] || "stylelint \"src/**/*.css\"";
-pkg.scripts.lint = pkg.scripts.lint || "npm run lint:js && npm run lint:css";
-pkg.scripts.precommit = pkg.scripts.precommit || "npm run format:check && npm run lint";
-pkg.scripts.lhci = pkg.scripts.lhci || "lhci autorun";
-pkg.scripts.prepare = pkg.scripts.prepare || "husky install";
+pkg.scripts.format = "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss,md,json,njk,html}\"";
+pkg.scripts["format:check"] = "prettier --check \"**/*.{js,jsx,ts,tsx,css,scss,md,json,njk,html}\"";
+pkg.scripts["lint:js"] = "eslint .";
+pkg.scripts["lint:css"] = "stylelint \"src/**/*.css\"";
+pkg.scripts.lint = "npm run lint:js && npm run lint:css";
+pkg.scripts.precommit = "npm run format:check && npm run lint";
+pkg.scripts.lhci = "lhci autorun";
+pkg.scripts.prepare = "husky install";
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 NODE
 
-# 8. Set up Husky
-echo "Setting up Husky pre-commit hook..."
+# 9. Husky setup
+echo "Setting up Husky..."
 npx husky install
 
 mkdir -p .husky
-npx husky add .husky/pre-commit "npm run precommit" > /dev/null 2>&1 || {
-  # If the above fails because the hook exists, just ensure it runs precommit
-  cat > .husky/pre-commit << 'EOF'
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
+cat > .husky/pre-commit << 'EOF'
+#!/usr/bin/env sh
 npm run precommit
 EOF
-  chmod +x .husky/pre-commit
-}
+chmod +x .husky/pre-commit
 
-# 9. GitHub Actions workflow
-echo "Creating GitHub Actions workflow (.github/workflows/ci-cd.yml)..."
+# 10. GitHub Actions workflow
+echo "Creating GitHub Actions workflow..."
 mkdir -p .github/workflows
 
 cat > .github/workflows/ci-cd.yml << 'EOF'
@@ -228,14 +330,22 @@ jobs:
           publish_dir: ./_site
 EOF
 
-echo "=== Done. Quality gates are configured. ==="
+echo "=== Done. Eleventy + quality gates configured. ==="
+echo
 echo "You now have:"
+echo "  - Eleventy base project (eleventy.config.js + src/ structure)"
 echo "  - Prettier (.prettierrc, .prettierignore)"
-echo "  - ESLint (.eslintrc.cjs, .eslintignore)"
+echo "  - ESLint v8 (.eslintrc.cjs, .eslintignore)"
 echo "  - Stylelint (.stylelintrc.json, .stylelintignore)"
 echo "  - Husky pre-commit hook (runs format:check + lint)"
-echo "  - Lighthouse CI (lighthouserc.json)"
-echo "  - GitHub Actions CI/CD (.github/workflows/ci-cd.yml)"
+echo "  - Lighthouse CI config (lighthouserc.json)"
+echo "  - GitHub Actions CI/CD workflow (.github/workflows/ci-cd.yml)"
+echo "  - This setup script (setup-quality-gates.sh) for reuse"
 echo
-echo "Try: npm run format:check, npm run lint, npm run build"
-echo "Then commit and push to see CI run on GitHub."
+echo "Try:"
+echo "  npm run format:check"
+echo "  npm run lint"
+echo "  npm run build"
+echo "  npm run dev"
+echo
+echo "Then commit and push to trigger CI on GitHub."

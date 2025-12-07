@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>{{ title or "portfolio" }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <header>
@@ -14,9 +14,7 @@
       </nav>
     </header>
 
-    <main>
-      {{ content | safe }}
-    </main>
+    <main>{{ content | safe }}</main>
 
     <footer>
       <p>&copy; {{ "now" | date("yyyy") }} bridget</p>
