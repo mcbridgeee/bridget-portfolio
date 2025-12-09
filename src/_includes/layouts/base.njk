@@ -2,22 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ title or "portfolio" }}</title>
+    <title>{{ title or "Bridget McTiernan" }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <header>
-      <h1>{{ title or "portfolio" }}</h1>
-      <nav>
-        <a href="/">home</a>
-      </nav>
-    </header>
+    <div class="container">
+      <header>
+        <nav>
+          <div class="logo">Bridget McTiernan</div>
+          <div class="nav-links">
+            <a href="/" class="{% if page.url == '/' %}active{% endif %}"
+              >About</a
+            >
+            <a
+              href="/projects/"
+              class="{% if '/projects/' in page.url %}active{% endif %}"
+              >Projects</a
+            >
+            <a
+              href="/contact/"
+              class="{% if '/contact/' in page.url %}active{% endif %}"
+              >Contact</a
+            >
+          </div>
+        </nav>
+      </header>
 
-    <main>{{ content | safe }}</main>
+      <main>{{ content | safe }}</main>
 
-    <footer>
-      <p>&copy; {{ "now" | date("yyyy") }} bridget</p>
-    </footer>
+      <footer>&copy; 2024 Bridget McTiernan</footer>
+    </div>
   </body>
 </html>
