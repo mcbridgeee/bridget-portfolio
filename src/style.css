@@ -1,12 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-  --text-main: #333;
-  --text-light: #666;
-  --bg-color: #fff;
-  --link-color: #333;
-  --font-main:
-    'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+  /* Colors - Cafe Collection */
+  --color-froth: #F1EEEB;
+  --color-chai: #E4D8CB;
+  --color-creme: #CDC6C3;
+  --color-cinna: #CFB3A9;
+  --color-latte: #A09086;
+  --text-main: #3E3836;
+  /* Dark charcoal/brown for readability */
+  --text-light: var(--color-latte);
+  --bg-color: var(--color-froth);
+  --link-color: var(--text-main);
+  --accent-color: var(--color-cinna);
+
+  /* Typography Scale (Ratio 1.25) */
+  --type-base: 16px;
+  /* 16px */
+  --type-lg: 20px;
+  /* 16 * 1.25 */
+  --type-xl: 25px;
+  /* 20 * 1.25 */
+  --type-2xl: 31.25px;
+  /* 25 * 1.25 */
+  --type-3xl: 39.06px;
+  /* 31.25 * 1.25 */
+  --type-4xl: 48.83px;
+  /* 39.06 * 1.25 */
+  --type-5xl: 61.04px;
+  /* 48.83 * 1.25 */
+  --type-6xl: 76.29px;
+  /* 61.04 * 1.25 */
+  --type-7xl: 95.36px;
+  /* 76.29 * 1.25 */
+
+  --font-main: 'Inter',
+    -apple-system,
+    blinkmacsystemfont,
+    'Segoe UI',
+    roboto,
+    sans-serif;
+  --font-heading: 'Playfair Display',
+    serif;
+
+  /* Spacing System (8pt mini grid base, 4px multiples) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Grid System Configuration */
+  --grid-columns: 4;
+  /* Phone default */
+  --grid-gap: var(--space-4);
+  --container-padding: var(--space-5);
+  --container-max-width: 1200px;
+}
+
+/* Tablet Override */
+@media (min-width: 768px) {
+  :root {
+    --grid-columns: 8;
+    --container-padding: var(--space-10);
+  }
+}
+
+/* Desktop Override */
+@media (min-width: 1024px) {
+  :root {
+    --grid-columns: 12;
+  }
 }
 
 * {
@@ -17,6 +87,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: var(--font-main);
+  font-size: var(--type-base);
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -29,39 +100,45 @@ a {
 }
 
 a:hover {
-  color: #000;
+  color: var(--color-latte);
 }
 
 /* Layout */
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
 }
 
 /* Header */
 header {
-  padding: 40px 0;
-  margin-bottom: 80px;
+  padding: var(--space-5) 0;
+  /* Reduced from space-10 for tighter feel with border */
+  margin-bottom: var(--space-20);
+  border-bottom: 1px solid var(--color-creme);
 }
 
 nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: var(--space-5);
+  align-items: flex-start;
 }
 
 .logo {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 14px;
+  /* Keeping specific small size for UI element */
   font-weight: 600;
   color: var(--text-main);
+  margin-bottom: var(--space-5);
 }
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: var(--space-5);
+  flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -76,171 +153,336 @@ nav {
   color: var(--text-main);
 }
 
+@media (min-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .nav-links {
+    gap: var(--space-10);
+  }
+
+  /* Tablet Hero Grid */
+  .hero-grid {
+    column-gap: var(--space-10);
+    /* Keep default stacked layout for tablet (inherits from base) */
+  }
+
+  /* Explicitly keeping 1/-1 for clarity, though base has it */
+  .hero-grid .subtitle,
+  .hero-grid .bio-text {
+    grid-column: 1 / -1;
+  }
+
+  /* Separator - maintain order */
+  .hero-grid .separator:nth-of-type(1) {
+    grid-column: 1 / -1;
+  }
+
+  /* Label/Link split at tablet */
+  .hero-grid .label {
+    grid-column: 1 / 5;
+    grid-row: auto;
+  }
+
+  .hero-grid .arrow-link {
+    grid-column: 5 / -1;
+    grid-row: auto;
+  }
+}
+
 /* Typography */
 h1 {
+  font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 80px;
+  font-size: var(--type-6xl);
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
   letter-spacing: -1px;
+  color: var(--color-latte);
 }
 
 .subtitle {
-  font-size: 32px;
+  font-size: var(--type-xl);
   color: var(--text-light);
   font-weight: 300;
-  margin-bottom: 100px;
+  margin-bottom: var(--space-16);
 }
 
-/* Split Layout for Content */
-.content-grid {
+@media (min-width: 1024px) {
+  h1 {
+    font-size: var(--type-7xl);
+  }
+
+  .subtitle {
+    font-size: var(--type-2xl);
+  }
+}
+
+/* General Grid Layout Utility */
+.grid-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
 }
 
-.label {
+/* Hero Section */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--space-10);
+  align-items: baseline;
+}
+
+.hero-grid h1 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-bottom: var(--space-5);
+}
+
+.hero-grid .subtitle {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-bottom: var(--space-5);
+}
+
+.hero-grid .bio-text {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  font-size: 18px;
+  color: var(--text-main);
+  max-width: 600px;
+  margin: 0;
+}
+
+/* Separator */
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-creme);
+  margin: var(--space-5) 0;
+  grid-column: 1 / -1;
+  grid-row: 4;
+  /* Default flow */
+}
+
+/* Specific Separator in Hero */
+.hero-grid .separator:nth-of-type(1) {
+  grid-column: 1 / -1;
+  grid-row: 4;
+}
+
+.hero-grid .label {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 14px;
   color: #999;
+  grid-column: 1 / -1;
+  grid-row: 5;
 }
 
-.bio-text {
-  font-size: 18px;
-  color: var(--text-main);
-  max-width: 600px;
-}
-
-.arrow-link {
+.hero-grid .arrow-link {
   display: inline-block;
-  margin-top: 40px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 13px;
-  border-bottom: 1px solid var(--text-main);
+  border-bottom: 1px solid var(--color-cinna);
+  color: var(--text-main);
   padding-bottom: 3px;
+  grid-column: 1 / -1;
+  grid-row: 6;
+  /* If stacked */
+}
+
+/* Tablet adjustments were handled above for label/link */
+
+/* Desktop Hero Layout */
+@media (min-width: 1024px) {
+  .hero-grid {
+    row-gap: var(--space-8);
+    column-gap: var(--space-16);
+  }
+
+  .hero-grid h1 {
+    grid-column: 1 / 9;
+    /* Span 8 cols (ends at line 9) to ensure ! falls before line 9? Or just size? The user said "make the heading a little smaller so that the ! falls before gridbox 9". If the H1 spans 1/-1, the text flow determines where ! falls. If I restrict the col span, it forces a wrap. But user asked for line break in HTML. So I'll keep 1/-1 but reduce font size. */
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 0;
+    font-size: var(--type-6xl);
+    /* Reduced from 7xl */
+  }
+
+  /* Side-by-Side: Subtitle (Left - spans up to line 9) */
+  .hero-grid .subtitle {
+    grid-column: 1 / 9;
+    /* Spans 8 cols, ends at line 9 */
+    grid-row: 2;
+    margin-bottom: 0;
+  }
+
+  /* Side-by-Side: Bio (Right - starts at line 9) */
+  .hero-grid .bio-text {
+    grid-column: 9 / -1;
+    /* Starts at line 9 (Col 9) */
+    grid-row: 2;
+    margin: 0;
+  }
+
+  /* Separator */
+  .hero-grid .separator:nth-of-type(1) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 0;
+    /* Reset margins */
+    margin-bottom: var(--space-5);
+  }
+
+  /* Label (Left) */
+  .hero-grid .label {
+    grid-column: 1 / 7;
+    grid-row: 4;
+  }
+
+  /* Link (Right) */
+  .hero-grid .arrow-link {
+    grid-column: 7 / -1;
+    grid-row: 4;
+  }
+}
+
+/* Content Grid (Contact Page, etc) */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--space-10);
+  margin-top: var(--space-10);
+}
+
+.content-grid .label {
+  grid-column: 1 / -1;
+}
+
+.content-grid .contact-list {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .content-grid .label {
+    grid-column: 1 / 5;
+    /* Span 4 */
+  }
+
+  .content-grid .contact-list {
+    grid-column: 5 / -1;
+    /* Span 8 */
+  }
 }
 
 /* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--space-10);
+  margin-top: var(--space-10);
 }
 
 .project-card {
-  margin-bottom: 40px;
+  /* Full width on mobile */
+  margin-bottom: var(--space-10);
+  background: #fff;
+  /* Slight contrast card */
+  padding: var(--space-4);
+  border: 1px solid var(--color-froth);
+}
+
+@media (min-width: 1024px) {
+  .project-card {
+    grid-column: span 6;
+    /* 2 per row on 12-col grid */
+  }
 }
 
 .project-title {
-  font-size: 24px;
+  font-family: var(--font-heading);
+  font-size: var(--type-xl);
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-3);
   display: block;
 }
 
 .project-desc {
-  color: var(--text-light);
-  font-size: 16px;
+  color: var(--text-main);
+  font-size: var(--type-base);
 }
 
 .project-tags {
-  margin-top: 15px;
+  margin-top: var(--space-4);
   display: flex;
-  gap: 15px;
+  gap: var(--space-4);
   font-size: 12px;
-  color: #999;
+  color: var(--color-latte);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
+/* Project Video */
+.project-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  /* 16:9 Aspect Ratio */
+  height: 0;
+  margin-bottom: var(--space-4);
+  background-color: #000;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.project-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Project Thumbnail */
+.project-thumbnail {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  margin-bottom: var(--space-4);
+  background-color: #f0f0f0;
+  border-radius: 2px;
+  display: block;
+}
+
 /* Footer */
 footer {
-  margin-top: 100px;
-  padding: 40px 0;
+  margin-top: var(--space-20);
+  padding: var(--space-10) 0;
   border-top: 1px solid #eee;
   font-size: 12px;
   color: #999;
 }
 
-/* Contact */
+/* Contact Page */
 .contact-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-5);
 }
 
 .contact-link {
-  font-size: 24px;
+  font-size: var(--type-xl);
   font-weight: 300;
   color: var(--text-main);
-}
-
-/* Name Animation */
-.wave-text {
-  display: inline-block;
-}
-
-.wave-text span {
-  display: inline-block;
-  animation-name: wave;
-  animation-duration: 3s;
-
-  /* Adjust speed of the wave */
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-/* Add delays for each letter to create the wave */
-.wave-text span:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.wave-text span:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.wave-text span:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.wave-text span:nth-child(4) {
-  animation-delay: 0.3s;
-}
-
-.wave-text span:nth-child(5) {
-  animation-delay: 0.4s;
-}
-
-.wave-text span:nth-child(6) {
-  animation-delay: 0.5s;
-}
-
-.wave-text span:nth-child(7) {
-  animation-delay: 0.6s;
-}
-
-@keyframes wave {
-  0% {
-    transform: scale(1);
-    color: var(--text-main);
-  }
-
-  20% {
-    transform: scale(1.5);
-    color: #ff69b4;
-
-    /* Pink */
-  }
-
-  40% {
-    transform: scale(1);
-    color: var(--text-main);
-  }
-
-  100% {
-    transform: scale(1);
-    color: var(--text-main);
-  }
 }
