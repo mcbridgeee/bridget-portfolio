@@ -2,12 +2,13 @@
 
 :root {
   /* Colors - Cafe Collection */
-  --color-froth: #F1EEEB;
-  --color-chai: #E4D8CB;
-  --color-creme: #CDC6C3;
-  --color-cinna: #CFB3A9;
-  --color-latte: #A09086;
-  --text-main: #3E3836;
+  --color-froth: #f1eeeb;
+  --color-chai: #e4d8cb;
+  --color-creme: #cdc6c3;
+  --color-cinna: #cfb3a9;
+  --color-latte: #a09086;
+  --text-main: #3e3836;
+
   /* Dark charcoal/brown for readability */
   --text-light: var(--color-latte);
   --bg-color: var(--color-froth);
@@ -16,32 +17,36 @@
 
   /* Typography Scale (Ratio 1.25) */
   --type-base: 16px;
+
   /* 16px */
   --type-lg: 20px;
+
   /* 16 * 1.25 */
   --type-xl: 25px;
+
   /* 20 * 1.25 */
   --type-2xl: 31.25px;
+
   /* 25 * 1.25 */
   --type-3xl: 39.06px;
+
   /* 31.25 * 1.25 */
   --type-4xl: 48.83px;
+
   /* 39.06 * 1.25 */
   --type-5xl: 61.04px;
+
   /* 48.83 * 1.25 */
   --type-6xl: 76.29px;
+
   /* 61.04 * 1.25 */
   --type-7xl: 95.36px;
+
   /* 76.29 * 1.25 */
 
-  --font-main: 'Inter',
-    -apple-system,
-    blinkmacsystemfont,
-    'Segoe UI',
-    roboto,
-    sans-serif;
-  --font-heading: 'Playfair Display',
-    serif;
+  --font-main:
+    'Inter', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;
+  --font-heading: 'Playfair Display', serif;
 
   /* Spacing System (8pt mini grid base, 4px multiples) */
   --space-1: 4px;
@@ -58,6 +63,7 @@
 
   /* Grid System Configuration */
   --grid-columns: 4;
+
   /* Phone default */
   --grid-gap: var(--space-4);
   --container-padding: var(--space-5);
@@ -65,7 +71,7 @@
 }
 
 /* Tablet Override */
-@media (min-width: 768px) {
+@media (width >= 768px) {
   :root {
     --grid-columns: 8;
     --container-padding: var(--space-10);
@@ -73,7 +79,7 @@
 }
 
 /* Desktop Override */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   :root {
     --grid-columns: 12;
   }
@@ -113,6 +119,7 @@ a:hover {
 /* Header */
 header {
   padding: var(--space-5) 0;
+
   /* Reduced from space-10 for tighter feel with border */
   margin-bottom: var(--space-20);
   border-bottom: 1px solid var(--color-creme);
@@ -129,6 +136,7 @@ nav {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 14px;
+
   /* Keeping specific small size for UI element */
   font-weight: 600;
   color: var(--text-main);
@@ -153,7 +161,7 @@ nav {
   color: var(--text-main);
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   nav {
     flex-direction: row;
     justify-content: space-between;
@@ -171,6 +179,7 @@ nav {
   /* Tablet Hero Grid */
   .hero-grid {
     column-gap: var(--space-10);
+
     /* Keep default stacked layout for tablet (inherits from base) */
   }
 
@@ -215,7 +224,7 @@ h1 {
   margin-bottom: var(--space-16);
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   h1 {
     font-size: var(--type-7xl);
   }
@@ -269,6 +278,7 @@ h1 {
   margin: var(--space-5) 0;
   grid-column: 1 / -1;
   grid-row: 4;
+
   /* Default flow */
 }
 
@@ -297,31 +307,32 @@ h1 {
   padding-bottom: 3px;
   grid-column: 1 / -1;
   grid-row: 6;
+
   /* If stacked */
 }
 
 /* Tablet adjustments were handled above for label/link */
 
 /* Desktop Hero Layout */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .hero-grid {
-    row-gap: var(--space-8);
-    column-gap: var(--space-16);
+    gap: var(--space-8) var(--space-16);
   }
 
   .hero-grid h1 {
-    grid-column: 1 / 9;
     /* Span 8 cols (ends at line 9) to ensure ! falls before line 9? Or just size? The user said "make the heading a little smaller so that the ! falls before gridbox 9". If the H1 spans 1/-1, the text flow determines where ! falls. If I restrict the col span, it forces a wrap. But user asked for line break in HTML. So I'll keep 1/-1 but reduce font size. */
     grid-column: 1 / -1;
     grid-row: 1;
     margin-bottom: 0;
     font-size: var(--type-6xl);
+
     /* Reduced from 7xl */
   }
 
   /* Side-by-Side: Subtitle (Left - spans up to line 9) */
   .hero-grid .subtitle {
     grid-column: 1 / 9;
+
     /* Spans 8 cols, ends at line 9 */
     grid-row: 2;
     margin-bottom: 0;
@@ -330,6 +341,7 @@ h1 {
   /* Side-by-Side: Bio (Right - starts at line 9) */
   .hero-grid .bio-text {
     grid-column: 9 / -1;
+
     /* Starts at line 9 (Col 9) */
     grid-row: 2;
     margin: 0;
@@ -340,6 +352,7 @@ h1 {
     grid-column: 1 / -1;
     grid-row: 3;
     margin-top: 0;
+
     /* Reset margins */
     margin-bottom: var(--space-5);
   }
@@ -373,14 +386,16 @@ h1 {
   grid-column: 1 / -1;
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .content-grid .label {
     grid-column: 1 / 5;
+
     /* Span 4 */
   }
 
   .content-grid .contact-list {
     grid-column: 5 / -1;
+
     /* Span 8 */
   }
 }
@@ -397,14 +412,16 @@ h1 {
   /* Full width on mobile */
   margin-bottom: var(--space-10);
   background: #fff;
+
   /* Slight contrast card */
   padding: var(--space-4);
   border: 1px solid var(--color-froth);
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .project-card {
     grid-column: span 6;
+
     /* 2 per row on 12-col grid */
   }
 }
@@ -437,6 +454,7 @@ h1 {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
+
   /* 16:9 Aspect Ratio */
   height: 0;
   margin-bottom: var(--space-4);
