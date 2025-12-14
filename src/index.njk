@@ -3,6 +3,39 @@ layout: base.njk
 title: 'bridget – portfolio'
 ---
 
+<style>
+  body {
+    /* Ensure content stays on top */
+    position: relative;
+    /* Clear any direct background if it was set elsewhere, though mostly handled by ::before now */
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    background-image: url('/home-bg.png');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: 95% center; /* Moved further right */
+    opacity: 0.2; /* Faded styling */
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    body::before {
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1; /* Even more faded on mobile to ensure readability */
+    }
+  }
+</style>
+
 <div class="hero-grid">
   <h1>
     hi, <br />
