@@ -20,14 +20,20 @@
           </button>
           <div class="nav-links">
             <a
+              href="/projects/"
+              class="{% if '/projects/' in page.url %}active{% endif %}"
+              >Projects</a
+            >
+            <a
               href="/about/"
               class="{% if '/about/' in page.url %}active{% endif %}"
               >About</a
             >
             <a
-              href="/projects/"
-              class="{% if '/projects/' in page.url %}active{% endif %}"
-              >Projects</a
+              href="https://www.canva.com/design/DAG75SscInw/bwT4fsU8PeybFpw7AtUbdg/view?utm_content=DAG75SscInw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc11888f864"
+              target="_blank"
+              class="{% if '/resume/' in page.url %}active{% endif %}"
+              >Resume</a
             >
             <a
               href="/contact/"

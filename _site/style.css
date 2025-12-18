@@ -184,9 +184,9 @@ nav {
 
 @media (width >=768px) {
   nav {
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
+
     /* No wrapping on desktop */
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
@@ -391,6 +391,7 @@ h1 {
   }
 
   /* Link (Right) */
+
   /* Link (Right) */
   .hero-grid .arrow-link {
     grid-column: 7 / -1;
@@ -517,6 +518,7 @@ h1 {
 
   .selected-works-grid .project-card {
     grid-column: span 4;
+
     /* 3 per row */
   }
 }
@@ -640,8 +642,6 @@ footer {
   border-bottom: 1px solid var(--color-latte);
 }
 
-
-
 /* Flex Wrapper for Reordering */
 .selected-works-wrapper {
   display: flex;
@@ -654,6 +654,7 @@ footer {
 
 .selected-works-wrapper .see-more-container {
   order: 2;
+
   /* Adjust spacing when it's in the middle */
   margin-bottom: var(--space-5);
 }

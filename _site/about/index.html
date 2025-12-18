@@ -20,14 +20,20 @@
           </button>
           <div class="nav-links">
             <a
+              href="/projects/"
+              class=""
+              >Projects</a
+            >
+            <a
               href="/about/"
               class="active"
               >About</a
             >
             <a
-              href="/projects/"
+              href="https://www.canva.com/design/DAG75SscInw/bwT4fsU8PeybFpw7AtUbdg/view?utm_content=DAG75SscInw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc11888f864"
+              target="_blank"
               class=""
-              >Projects</a
+              >Resume</a
             >
             <a
               href="/contact/"
@@ -47,13 +53,13 @@
     </h1>
 
     <p class="bio-text">
-      exploring the intersection of design and human behavior through thoughtful,
-      research-driven experiences.
+      exploring the intersection of design and human behavior through
+      thoughtful, research-driven experiences.
     </p>
   </div>
 
   <div class="about-img-container">
-    <img src="/bridget-picture.png" class="about-img" alt="Bridget McTiernan">
+    <img src="/bridget-picture.png" class="about-img" alt="Bridget McTiernan" />
     <div class="about-overlay"></div>
   </div>
 
@@ -65,9 +71,11 @@
     </div>
 
     <script>
-      document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('open');
-      });
+      document
+        .querySelector('.menu-toggle')
+        .addEventListener('click', function () {
+          document.querySelector('.nav-links').classList.toggle('open');
+        });
     </script>
   </body>
 </html>

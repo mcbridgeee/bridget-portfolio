@@ -20,14 +20,20 @@
           </button>
           <div class="nav-links">
             <a
+              href="/projects/"
+              class="active"
+              >Projects</a
+            >
+            <a
               href="/about/"
               class=""
               >About</a
             >
             <a
-              href="/projects/"
-              class="active"
-              >Projects</a
+              href="https://www.canva.com/design/DAG75SscInw/bwT4fsU8PeybFpw7AtUbdg/view?utm_content=DAG75SscInw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc11888f864"
+              target="_blank"
+              class=""
+              >Resume</a
             >
             <a
               href="/contact/"
@@ -132,9 +138,11 @@
     </div>
 
     <script>
-      document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.nav-links').classList.toggle('open');
-      });
+      document
+        .querySelector('.menu-toggle')
+        .addEventListener('click', function () {
+          document.querySelector('.nav-links').classList.toggle('open');
+        });
     </script>
   </body>
 </html>
