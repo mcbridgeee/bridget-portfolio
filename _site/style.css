@@ -71,7 +71,7 @@
 }
 
 /* Tablet Override */
-@media (width >= 768px) {
+@media (width >=768px) {
   :root {
     --grid-columns: 8;
     --container-padding: var(--space-10);
@@ -79,7 +79,7 @@
 }
 
 /* Desktop Override */
-@media (width >= 1024px) {
+@media (width >=1024px) {
   :root {
     --grid-columns: 12;
   }
@@ -127,9 +127,9 @@ header {
 
 nav {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -140,13 +140,34 @@ nav {
   /* Keeping specific small size for UI element */
   font-weight: 600;
   color: var(--text-main);
-  margin-bottom: var(--space-5);
+}
+
+.menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 5px 0;
+  background-color: var(--text-main);
 }
 
 .nav-links {
-  display: flex;
+  display: none;
+  width: 100%;
+  flex-direction: column;
   gap: var(--space-5);
-  flex-wrap: wrap;
+  padding-top: var(--space-5);
+}
+
+.nav-links.open {
+  display: flex;
 }
 
 .nav-links a {
@@ -161,18 +182,24 @@ nav {
   color: var(--text-main);
 }
 
-@media (width >= 768px) {
+@media (width >=768px) {
   nav {
+    flex-wrap: nowrap;
+    /* No wrapping on desktop */
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  .logo {
-    margin-bottom: 0;
+  .menu-toggle {
+    display: none;
   }
 
   .nav-links {
+    display: flex !important;
+    width: auto;
+    flex-direction: row;
+    padding-top: 0;
     gap: var(--space-10);
   }
 
@@ -210,7 +237,7 @@ nav {
 h1 {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: var(--type-6xl);
+  font-size: var(--type-4xl);
   line-height: 1.1;
   margin-bottom: var(--space-5);
   letter-spacing: -1px;
@@ -224,7 +251,7 @@ h1 {
   margin-bottom: var(--space-16);
 }
 
-@media (width >= 1024px) {
+@media (width >=1024px) {
   h1 {
     font-size: var(--type-7xl);
   }
@@ -314,7 +341,7 @@ h1 {
 /* Tablet adjustments were handled above for label/link */
 
 /* Desktop Hero Layout */
-@media (width >= 1024px) {
+@media (width >=1024px) {
   .hero-grid {
     gap: var(--space-8) var(--space-16);
   }
@@ -364,10 +391,72 @@ h1 {
   }
 
   /* Link (Right) */
+  /* Link (Right) */
   .hero-grid .arrow-link {
     grid-column: 7 / -1;
     grid-row: 4;
   }
+
+  /* About Page Hero Overrides */
+  .about-hero {
+    align-items: start;
+  }
+
+  .about-hero .about-text-column {
+    grid-column: 1 / 9;
+    grid-row: 1;
+  }
+
+  /* Reset children grid props since they are in the column now */
+  .about-hero h1 {
+    margin-bottom: 0.6em;
+    margin-top: 0;
+  }
+
+  .about-hero .about-img-container {
+    grid-column: 9 / -1;
+    grid-row: 1;
+    margin-bottom: var(--space-5);
+  }
+}
+
+/* About Page Specifics */
+.about-img-container {
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-bottom: var(--space-5);
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-cinna);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.about-img-container:hover .about-overlay {
+  opacity: 0;
+}
+
+.about-hero .bio-text {
+  grid-row: 3;
+}
+
+.about-hero .separator {
+  grid-row: 4;
 }
 
 /* Content Grid (Contact Page, etc) */
@@ -386,7 +475,7 @@ h1 {
   grid-column: 1 / -1;
 }
 
-@media (width >= 1024px) {
+@media (width >=1024px) {
   .content-grid .label {
     grid-column: 1 / 5;
 
@@ -416,13 +505,19 @@ h1 {
   /* Slight contrast card */
   padding: var(--space-4);
   border: 1px solid var(--color-froth);
+  grid-column: 1 / -1;
 }
 
-@media (width >= 1024px) {
+@media (width >=1024px) {
   .project-card {
     grid-column: span 6;
 
     /* 2 per row on 12-col grid */
+  }
+
+  .selected-works-grid .project-card {
+    grid-column: span 4;
+    /* 3 per row */
   }
 }
 
@@ -471,6 +566,22 @@ h1 {
   height: 100%;
 }
 
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-cinna);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.project-video-container:hover .video-overlay {
+  opacity: 0;
+}
+
 /* Project Thumbnail */
 .project-thumbnail {
   width: 100%;
@@ -503,4 +614,65 @@ footer {
   font-size: var(--type-xl);
   font-weight: 300;
   color: var(--text-main);
+}
+
+/* Selected Works Section Classes */
+.selected-works-container {
+  margin-top: var(--space-10);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  color: var(--color-latte);
+  font-size: var(--type-3xl);
+  margin-bottom: var(--space-5);
+}
+
+.see-more-container {
+  margin-top: var(--space-5);
+  text-align: right;
+}
+
+.see-more-link {
+  font-family: var(--font-heading);
+  color: var(--color-latte);
+  font-size: var(--type-lg);
+  border-bottom: 1px solid var(--color-latte);
+}
+
+
+
+/* Flex Wrapper for Reordering */
+.selected-works-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-works-wrapper .selected-works-container {
+  order: 1;
+}
+
+.selected-works-wrapper .see-more-container {
+  order: 2;
+  /* Adjust spacing when it's in the middle */
+  margin-bottom: var(--space-5);
+}
+
+.selected-works-wrapper .selected-works-grid {
+  order: 3;
+}
+
+@media (width >=1024px) {
+  .selected-works-container {
+    margin-top: var(--space-20);
+  }
+
+  /* Desktop Reordering */
+  .selected-works-wrapper .selected-works-grid {
+    order: 2;
+  }
+
+  .selected-works-wrapper .see-more-container {
+    order: 3;
+  }
 }

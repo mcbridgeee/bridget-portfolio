@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ title or "Bridget McTiernan" }}</title>
+    <title>About - Bridget McTiernan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/style.css" />
   </head>
@@ -21,34 +21,53 @@
           <div class="nav-links">
             <a
               href="/about/"
-              class="{% if '/about/' in page.url %}active{% endif %}"
+              class="active"
               >About</a
             >
             <a
               href="/projects/"
-              class="{% if '/projects/' in page.url %}active{% endif %}"
+              class=""
               >Projects</a
             >
             <a
               href="/contact/"
-              class="{% if '/contact/' in page.url %}active{% endif %}"
+              class=""
               >Contact</a
             >
           </div>
         </nav>
       </header>
 
-      <main>{{ content | safe }}</main>
+      <main>
+<div class="hero-grid about-hero">
+  <div class="about-text-column">
+    <h1>
+      hi, <br />
+      i'm bridget!
+    </h1>
+
+    <p class="bio-text">
+      exploring the intersection of design and human behavior through thoughtful,
+      research-driven experiences.
+    </p>
+  </div>
+
+  <div class="about-img-container">
+    <img src="/bridget-picture.png" class="about-img" alt="Bridget McTiernan">
+    <div class="about-overlay"></div>
+  </div>
+
+  <div class="separator"></div>
+</div>
+</main>
 
       <footer>&copy; 2024 Bridget McTiernan</footer>
     </div>
 
     <script>
-      document
-        .querySelector('.menu-toggle')
-        .addEventListener('click', function () {
-          document.querySelector('.nav-links').classList.toggle('open');
-        });
+      document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('open');
+      });
     </script>
   </body>
 </html>

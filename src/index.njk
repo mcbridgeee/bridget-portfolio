@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-title: 'bridget – portfolio'
+title: Home - Bridget McTiernan
 ---
 
 <style>
@@ -12,11 +12,11 @@ title: 'bridget – portfolio'
 
   body::before {
     content: '';
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
 
     background-image: url('/home-bg.png');
@@ -37,16 +37,75 @@ title: 'bridget – portfolio'
 </style>
 
 <div class="hero-grid">
-  <h1>
-    hi, <br />
-    i'm bridget!
-  </h1>
-  <div class="subtitle">thanks for checking out my site</div>
-
-  <p class="bio-text">
-    exploring the intersection of design and human behavior through thoughtful,
-    research-driven experiences.
-  </p>
+  <div style="grid-column: 1 / -1; grid-row: 1">
+    <h1 style="margin-bottom: 0.2em">ux designer</h1>
+    <p
+      style="
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        margin: 0;
+        line-height: 1.2;
+      "
+    >
+      focused on systems and human behavior
+    </p>
+  </div>
 
   <div class="separator"></div>
 </div>
+
+<div class="selected-works-wrapper">
+  <div class="content-grid selected-works-container">
+    <div class="label section-title">my selected works</div>
+  </div>
+
+  <div class="projects-grid selected-works-grid" style="margin-top: 0">
+    <!-- Card 1 -->
+    <div class="project-card">
+      <a
+        href="/projects/"
+        class="project-thumbnail"
+        style="background-color: #ddd"
+      ></a>
+      <a href="/projects/" class="project-title">Project One</a>
+      <div class="project-desc">A brief description of this selected work.</div>
+      <div class="project-tags">
+        <span>UX Design</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card">
+      <a
+        href="/projects/"
+        class="project-thumbnail"
+        style="background-color: #ddd"
+      ></a>
+      <a href="/projects/" class="project-title">Project Two</a>
+      <div class="project-desc">A brief description of this selected work.</div>
+      <div class="project-tags">
+        <span>Research</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card">
+      <a
+        href="/projects/"
+        class="project-thumbnail"
+        style="background-color: #ddd"
+      ></a>
+      <a href="/projects/" class="project-title">Project Three</a>
+      <div class="project-desc">A brief description of this selected work.</div>
+      <div class="project-tags">
+        <span>System Design</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="see-more-container">
+    <a href="/projects/" class="see-more-link">see more! &rarr;</a>
+  </div>
+</div>
+
+<div class="separator"></div>

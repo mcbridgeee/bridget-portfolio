@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>bridget – portfolio</title>
+    <title>Home - Bridget McTiernan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/style.css" />
   </head>
@@ -10,9 +10,18 @@
     <div class="container">
       <header>
         <nav>
-          <div class="logo">Bridget McTiernan</div>
+          <div class="logo">
+            <a href="/">Bridget McTiernan</a>
+          </div>
+          <button class="menu-toggle" aria-label="Toggle navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
           <div class="nav-links">
-            <a href="/" class="active"
+            <a
+              href="/about/"
+              class=""
               >About</a
             >
             <a
@@ -38,14 +47,14 @@
   }
 
   body::before {
-    content: "";
-    position: fixed;
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
-    
+
     background-image: url('/home-bg.png');
     background-repeat: no-repeat;
     background-size: 80%;
@@ -56,30 +65,89 @@
 
   @media (max-width: 768px) {
     body::before {
-       background-size: cover;
-       background-position: center;
-       opacity: 0.1; /* Even more faded on mobile to ensure readability */
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1; /* Even more faded on mobile to ensure readability */
     }
   }
 </style>
 
 <div class="hero-grid">
-  <h1>
-    hi, <br />
-    i'm bridget!
-  </h1>
-  <div class="subtitle">thanks for checking out my site</div>
-
-  <p class="bio-text">
-    exploring the intersection of design and human behavior through thoughtful,
-    research-driven experiences.
-  </p>
+  <div style="grid-column: 1 / -1; grid-row: 1">
+    <h1 style="margin-bottom: 0.2em">ux designer</h1>
+    <p
+      style="
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        margin: 0;
+        line-height: 1.2;
+      "
+    >
+      focused on systems and human behavior
+    </p>
+  </div>
 
   <div class="separator"></div>
 </div>
+
+<div class="selected-works-wrapper">
+  <div class="content-grid selected-works-container">
+    <div class="label section-title">my selected works</div>
+  </div>
+
+  <div class="projects-grid selected-works-grid" style="margin-top: 0">
+    <!-- Card 1 -->
+    <div class="project-card">
+      <a href="/projects/" class="project-thumbnail" style="background-color: #ddd"></a>
+      <a href="/projects/" class="project-title">Project One</a>
+      <div class="project-desc">
+        A brief description of this selected work.
+      </div>
+      <div class="project-tags">
+        <span>UX Design</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card">
+      <a href="/projects/" class="project-thumbnail" style="background-color: #ddd"></a>
+      <a href="/projects/" class="project-title">Project Two</a>
+      <div class="project-desc">
+        A brief description of this selected work.
+      </div>
+      <div class="project-tags">
+        <span>Research</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card">
+      <a href="/projects/" class="project-thumbnail" style="background-color: #ddd"></a>
+      <a href="/projects/" class="project-title">Project Three</a>
+      <div class="project-desc">
+        A brief description of this selected work.
+      </div>
+      <div class="project-tags">
+        <span>System Design</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="see-more-container">
+    <a href="/projects/" class="see-more-link">see more! &rarr;</a>
+  </div>
+</div>
+
+<div class="separator"></div>
 </main>
 
       <footer>&copy; 2024 Bridget McTiernan</footer>
     </div>
+
+    <script>
+      document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.toggle('open');
+      });
+    </script>
   </body>
 </html>
