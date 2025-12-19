@@ -285,27 +285,29 @@ h1 {
 .hero-name {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 4vw;
-  /* Way smaller as requested */
+  font-size: 10vw;
+
+  /* Increased per request */
   line-height: 1;
   margin: 0 0 var(--space-4) 0;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
+
   /* Tighter for Playfair */
   color: var(--color-latte);
   white-space: nowrap;
   overflow: visible;
   text-overflow: clip;
-  /* text-transform removed */
+  text-transform: lowercase;
 }
 
 /* Desktop override removed to respect vw scaling */
 
 .hero-subtitle {
-  font-family: var(--font-main);
+  font-family: var(--font-heading);
   font-weight: 300;
-  font-size: var(--type-2xl);
+  font-size: var(--type-3xl);
   color: var(--text-light);
-  margin: 0 0 var(--space-2) 0;
+  margin: 0 0 var(--space-5) 0;
   text-transform: lowercase;
 }
 
@@ -552,6 +554,15 @@ h1 {
   font-weight: 400;
   margin-bottom: var(--space-3);
   display: block;
+  text-transform: lowercase;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.project-title:hover {
+  text-decoration: underline;
+  color: #000;
 }
 
 .project-desc {
@@ -569,6 +580,17 @@ h1 {
   letter-spacing: 0.5px;
 }
 
+.project-tags a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.project-tags a:hover {
+  border-color: currentColor;
+}
+
 /* Project Video */
 .project-video-container {
   position: relative;
@@ -583,12 +605,31 @@ h1 {
   overflow: hidden;
 }
 
-.project-video {
+.project-video-container iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
+}
+
+.video-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+  /* Let clicks pass if we want, but if it fades on hover, pointer events might not matter as much. Actually, if it's visible, we probably want it to block clicks? But if it fades on hover, you can click the video. safely leave pointer-events: none to avoid blocking interaction if fade fails or something. */
+  /* Actually, if pointer-events: none, hover might pass through? No, hover is on container. */
+}
+
+.project-video-container:hover .video-cover {
+  opacity: 0;
 }
 
 .video-overlay {
@@ -601,6 +642,8 @@ h1 {
   opacity: 0.35;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 2;
+  /* On top of cover */
 }
 
 .project-video-container:hover .video-overlay {
@@ -611,6 +654,7 @@ h1 {
 .project-thumbnail-link {
   display: block;
   position: relative;
+
   /* Ensure overlay is positioned relative to this */
 }
 
@@ -641,8 +685,10 @@ h1 {
   pointer-events: none;
   transition: opacity 0.3s ease;
   border-radius: 2px;
+
   /* Match img border radius */
   z-index: 2;
+
   /* On top of hover img */
 }
 
