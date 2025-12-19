@@ -9,5 +9,6 @@ module.exports = function (eleventyConfig) {
       output: '_site',
     },
     templateFormats: ['njk', 'md', 'html'],
+    pathPrefix: '/bridget-portfolio/',
   };
 };

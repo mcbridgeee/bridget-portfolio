@@ -4,33 +4,32 @@
     <meta charset="UTF-8" />
     <title>{{ title or "Bridget McTiernan" }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="{{ '/style.css' | url }}" />
   </head>
   <body>
     <div class="container">
       <header>
         <nav>
           <div class="logo">
-            <a href="/">Bridget McTiernan</a>
+            <a href="{{ '/' | url }}">Bridget McTiernan</a>
           </div>
           <button class="menu-toggle" aria-label="Toggle navigation">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
           </button>
-          <div class="nav-links">
             <a
-              href="/projects/"
+              href="{{ '/projects/' | url }}"
               class="{% if '/projects/' in page.url %}active{% endif %}"
               >Projects</a
             >
             <a
-              href="/about/"
+              href="{{ '/about/' | url }}"
               class="{% if '/about/' in page.url %}active{% endif %}"
               >About</a
             >
             <a
-              href="/contact/"
+              href="{{ '/contact/' | url }}"
               class="{% if '/contact/' in page.url %}active{% endif %}"
               >Contact</a
             >
