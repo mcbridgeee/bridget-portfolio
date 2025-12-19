@@ -281,6 +281,7 @@ h1 {
   grid-row: 1;
   margin-bottom: var(--space-5);
   margin-top: var(--space-20);
+
   /* Push down on mobile */
 }
 
@@ -394,6 +395,7 @@ h1 {
 
 .about-hero .bio-text {
   order: 3;
+  grid-row: 3;
 }
 
 .about-img {
@@ -419,10 +421,6 @@ h1 {
   opacity: 0;
 }
 
-.about-hero .bio-text {
-  grid-row: 3;
-}
-
 .about-hero .separator {
   order: 4;
   grid-row: 4;
@@ -439,11 +437,13 @@ h1 {
     grid-row: 1;
     margin-bottom: 0;
     margin-top: 0;
+
     /* Reset mobile margin */
   }
 
   .hero-name {
     font-size: 10vw;
+
     /* Reset to reasonable size for desktop */
   }
 
@@ -492,6 +492,7 @@ h1 {
   /* About Page Hero Overrides */
   .about-hero {
     display: grid;
+
     /* Restore grid for desktop */
     align-items: start;
   }
@@ -516,7 +517,6 @@ h1 {
   }
 }
 
-
 /* Content Grid (Contact Page, etc) */
 .content-grid {
   display: grid;
@@ -527,23 +527,284 @@ h1 {
 
 .content-grid .label {
   grid-column: 1 / -1;
+  text-transform: lowercase;
+  /* Enforce lowercase per request */
 }
 
-.content-grid .contact-list {
-  grid-column: 1 / -1;
+/* --- Contact Page New Layout --- */
+
+.contact-split-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  margin-top: var(--space-12);
+  /* Increased from space-8 for more breathing room */
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: var(--type-xl);
+  color: var(--text-main);
+  margin-bottom: var(--space-5);
+  text-transform: lowercase;
+}
+
+/* Left Column Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-family: var(--font-main);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: var(--space-3);
+  border: 1px solid var(--color-creme);
+  border-radius: 4px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: #fff;
+  width: 100%;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.btn-submit {
+  background-color: #a89f91;
+  /* Match icon box color or keep dark? Reference has dark button */
+  background-color: var(--text-main);
+  color: #fff;
+  border: none;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+  text-transform: uppercase;
+  /* Reference has uppercase button text */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+/* Right Column Channels */
+.channels-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.channel-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background: #fff;
+  padding: var(--space-3);
+  border-radius: 6px;
+  border: 1px solid #eee;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.channel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.icon-box {
+  width: 40px;
+  height: 40px;
+  background-color: #a89f91;
+  /* Muted brown from reference */
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.channel-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.channel-value {
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+/* Response Time Card */
+.response-time-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: #fff;
+  padding: var(--space-4);
+  border-radius: 6px;
+  min-height: 80px;
+  margin-bottom: var(--space-8);
+  border: 1px solid #eee;
+}
+
+.response-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.response-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.response-text {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+/* Open To Section */
+.open-to-section {
+  background-color: #eeebe6;
+  /* Beige bg */
+  padding: var(--space-5);
+  border-radius: 6px;
+}
+
+.open-to-label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #999;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.5px;
+}
+
+.open-to-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.open-to-list li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.open-to-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-latte);
+}
+
+@media (width >=1024px) {
+  .contact-split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+}
+
+/* --- Global Footer --- */
+.site-footer {
+  margin-top: var(--space-20);
+  padding: var(--space-10) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.footer-right a {
+  color: var(--text-light);
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.footer-right a:hover {
+  color: var(--color-cinna);
+}
+
+@media (width >=768px) {
+  .site-footer {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
 }
 
 @media (width >=1024px) {
   .content-grid .label {
     grid-column: 1 / 5;
-
     /* Span 4 */
   }
 
   .content-grid .contact-list {
     grid-column: 5 / -1;
-
     /* Span 8 */
+  }
+
+  .contact-form {
+    grid-column: 5 / -1;
+    /* align with contact list */
   }
 }
 

@@ -5,6 +5,7 @@
     <title>Contact Info</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/bridget-portfolio/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <div class="container">
@@ -47,28 +48,102 @@
       </header>
 
       <main>
-<h1>Contact</h1>
-<div class="subtitle">Get in touch</div>
+<h1>contact</h1>
+<div class="subtitle">send me a message if you want to collaborate or even if you just wanna say hi!  i'm always open to new opportunities</div>
 
-<div class="content-grid">
-  <div class="label">CONTACT INFO</div>
-  <div class="contact-list">
-    <div>
-      <a href="mailto:bridget@example.com" class="contact-link"
-        >bridget@example.com</a
-      >
+<div class="separator"></div>
+
+<div class="contact-split-layout">
+  <!-- Left Column: Form -->
+  <div class="contact-left">
+    
+    <form class="contact-form" action="https://formspree.io/f/mwvekzka" method="POST">
+      <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" id="name" name="name" required placeholder="your name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">email</label>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+      </div>
+      
+      <div class="form-group">
+        <label for="message">message</label>
+        <textarea id="message" name="message" required placeholder="your message..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> send message</button>
+    </form>
+  </div>
+
+  <!-- Right Column: Direct Channels -->
+  <div class="contact-right">
+
+    <div class="channels-list">
+      <!-- Email Card -->
+      <a href="mailto:bridgetmctiernan@protonmail.com" class="channel-card">
+        <div class="icon-box"><i class="fas fa-envelope"></i></div>
+        <div class="channel-info">
+          <span class="channel-label">email</span>
+          <span class="channel-value">bridgetmctiernan@protonmail.com</span>
+        </div>
+      </a>
+
+      <!-- LinkedIn Card -->
+      <a href="https://www.linkedin.com/in/bridget-mctiernan/" class="channel-card">
+        <div class="icon-box"><i class="fab fa-linkedin-in"></i></div>
+        <div class="channel-info">
+          <span class="channel-label">linkedin</span>
+          <span class="channel-value">linkedin.com/in/bridget-mctiernan</span>
+        </div>
+      </a>
+
+      <!-- GitHub Card -->
+      <a href="https://github.com/mcbridgeee" class="channel-card">
+        <div class="icon-box"><i class="fab fa-github"></i></div>
+        <div class="channel-info">
+          <span class="channel-label">github</span>
+          <span class="channel-value">github.com/mcbridgeee</span>
+        </div>
+      </a>
     </div>
-    <div>
-      <a href="https://linkedin.com" class="contact-link">LinkedIn</a>
+
+    <!-- Response Time -->
+    <div class="response-time-card">
+      <div class="icon-box"><i class="far fa-clock"></i></div>
+      <div class="response-info">
+        <span class="response-label">response time</span>
+        <span class="response-text">typical response within 24-48 hours. urgent matters: please indicate in message.</span>
+      </div>
     </div>
-    <div>
-      <a href="https://github.com/mcbridgeee" class="contact-link">GitHub</a>
+
+    <!-- Open To -->
+    <div class="open-to-section">
+      <span class="open-to-label">open to</span>
+      <ul class="open-to-list">
+        <li>freelance ux/ui projects</li>
+        <li>design research collaborations</li>
+        <li>internships & full time roles</li>
+        <li>photo/video editing</li>
+      </ul>
     </div>
   </div>
 </div>
 </main>
 
-      <footer>&copy; 2024 Bridget McTiernan</footer>
+      <div class="separator"></div>
+
+      <footer class="site-footer">
+        <div class="footer-left">
+          &copy; 2025 Bridget McTiernan
+        </div>
+        <div class="footer-right">
+          <a href="https://www.linkedin.com/in/bridget-mctiernan/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mcbridgeee" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" target="_blank" aria-label="IMDb"><i class="fab fa-imdb"></i></a>
+        </div>
+      </footer>
     </div>
 
     <script>
