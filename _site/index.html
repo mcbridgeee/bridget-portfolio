@@ -4,40 +4,42 @@
     <meta charset="UTF-8" />
     <title>Home - Bridget McTiernan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/bridget-portfolio/style.css" />
   </head>
   <body>
     <div class="container">
       <header>
         <nav>
           <div class="logo">
-            <a href="/">Bridget McTiernan</a>
+            <a href="/bridget-portfolio/">Bridget McTiernan</a>
           </div>
+
           <button class="menu-toggle" aria-label="Toggle navigation">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
           </button>
+
           <div class="nav-links">
             <a
-              href="/projects/"
+              href="/bridget-portfolio/projects/"
               class=""
               >Projects</a
             >
             <a
-              href="/about/"
+              href="/bridget-portfolio/about/"
               class=""
               >About</a
             >
             <a
-              href="/contact/"
+              href="/bridget-portfolio/contact/"
               class=""
               >Contact</a
             >
             <a
               href="https://www.canva.com/design/DAG75SscInw/bwT4fsU8PeybFpw7AtUbdg/view?utm_content=DAG75SscInw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc11888f864"
               target="_blank"
-              class=""
+              rel="noopener"
               >Resume</a
             >
           </div>
@@ -61,7 +63,7 @@
     height: 100vh;
     z-index: -1;
 
-    background-image: url('/home-bg.png');
+    background-image: url('/bridget-portfolio/home-bg.png');
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: 95% center; /* Moved further right */
@@ -86,11 +88,11 @@
       style="
         font-family: var(--font-main);
         font-size: 1.5rem;
-        margin: 0;
+        margin: var(--space-12) 0 0 0;
         line-height: 1.2;
       "
     >
-      focused on systems and human behavior
+      focused on the intersection between humans and our technology
     </p>
   </div>
 
@@ -124,7 +126,7 @@
           allowfullscreen
         ></iframe>
         <img
-          src="/asbestos-cover.png"
+          src="/bridget-portfolio/asbestos-cover.png"
           alt="The Asbestos City"
           class="video-cover"
         />
@@ -153,7 +155,7 @@
         class="project-thumbnail-link"
       >
         <img
-          src="/user-research-platform.png"
+          src="/bridget-portfolio/user-research-platform.png"
           alt="Neo Swiss Site"
           class="project-thumbnail"
         />
@@ -175,7 +177,7 @@
         class="project-thumbnail-link"
       >
         <img
-          src="/accessibility-checker.png"
+          src="/bridget-portfolio/accessibility-checker.png"
           alt="Del Vecchio Home Care"
           class="project-thumbnail"
         />
@@ -192,7 +194,9 @@
   </div>
 
   <div class="see-more-container">
-    <a href="/projects/" class="see-more-link">see more! &rarr;</a>
+    <a href="/bridget-portfolio/projects/" class="see-more-link"
+      >see more! &rarr;</a
+    >
   </div>
 </div>
 

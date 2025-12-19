@@ -237,7 +237,7 @@ nav {
 h1 {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: var(--type-4xl);
+  font-size: var(--type-6xl);
   line-height: 1.1;
   margin-bottom: var(--space-5);
   letter-spacing: -1px;
@@ -280,12 +280,14 @@ h1 {
   grid-column: 1 / -1;
   grid-row: 1;
   margin-bottom: var(--space-5);
+  margin-top: var(--space-20);
+  /* Push down on mobile */
 }
 
 .hero-name {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 10vw;
+  font-size: 19vw;
 
   /* Increased per request */
   line-height: 1;
@@ -369,6 +371,63 @@ h1 {
 
 /* Tablet adjustments were handled above for label/link */
 
+/* About Page Specifics (Base/Mobile) */
+.about-hero {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-hero .about-text-column {
+  display: contents;
+}
+
+.about-hero h1 {
+  order: 1;
+}
+
+.about-img-container {
+  position: relative;
+  grid-column: 1 / -1;
+  order: 2;
+  margin-bottom: var(--space-5);
+}
+
+.about-hero .bio-text {
+  order: 3;
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-cinna);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.about-img-container:hover .about-overlay {
+  opacity: 0;
+}
+
+.about-hero .bio-text {
+  grid-row: 3;
+}
+
+.about-hero .separator {
+  order: 4;
+  grid-row: 4;
+}
+
 /* Desktop Hero Layout */
 @media (width >=1024px) {
   .hero-grid {
@@ -379,6 +438,13 @@ h1 {
     grid-column: 1 / -1;
     grid-row: 1;
     margin-bottom: 0;
+    margin-top: 0;
+    /* Reset mobile margin */
+  }
+
+  .hero-name {
+    font-size: 10vw;
+    /* Reset to reasonable size for desktop */
   }
 
   /* Side-by-Side: Subtitle (Left - spans up to line 9) */
@@ -425,10 +491,14 @@ h1 {
 
   /* About Page Hero Overrides */
   .about-hero {
+    display: grid;
+    /* Restore grid for desktop */
     align-items: start;
   }
 
+  /* Restore block display for column wrapper */
   .about-hero .about-text-column {
+    display: block;
     grid-column: 1 / 9;
     grid-row: 1;
   }
@@ -446,44 +516,6 @@ h1 {
   }
 }
 
-/* About Page Specifics */
-.about-img-container {
-  position: relative;
-  grid-column: 1 / -1;
-  grid-row: 2;
-  margin-bottom: var(--space-5);
-}
-
-.about-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 2px;
-}
-
-.about-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-cinna);
-  opacity: 0.35;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.about-img-container:hover .about-overlay {
-  opacity: 0;
-}
-
-.about-hero .bio-text {
-  grid-row: 3;
-}
-
-.about-hero .separator {
-  grid-row: 4;
-}
 
 /* Content Grid (Contact Page, etc) */
 .content-grid {
@@ -588,7 +620,7 @@ h1 {
 }
 
 .project-tags a:hover {
-  border-color: currentColor;
+  border-color: currentcolor;
 }
 
 /* Project Video */
@@ -624,7 +656,9 @@ h1 {
   transition: opacity 0.3s ease;
   z-index: 1;
   pointer-events: none;
+
   /* Let clicks pass if we want, but if it fades on hover, pointer events might not matter as much. Actually, if it's visible, we probably want it to block clicks? But if it fades on hover, you can click the video. safely leave pointer-events: none to avoid blocking interaction if fade fails or something. */
+
   /* Actually, if pointer-events: none, hover might pass through? No, hover is on container. */
 }
 
@@ -643,6 +677,7 @@ h1 {
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 2;
+
   /* On top of cover */
 }
 
