@@ -528,6 +528,7 @@ h1 {
 .content-grid .label {
   grid-column: 1 / -1;
   text-transform: lowercase;
+
   /* Enforce lowercase per request */
 }
 
@@ -538,6 +539,7 @@ h1 {
   flex-direction: column;
   gap: var(--space-10);
   margin-top: var(--space-12);
+
   /* Increased from space-8 for more breathing room */
 }
 
@@ -588,7 +590,6 @@ h1 {
 }
 
 .btn-submit {
-  background-color: #a89f91;
   /* Match icon box color or keep dark? Reference has dark button */
   background-color: var(--text-main);
   color: #fff;
@@ -601,6 +602,7 @@ h1 {
   border-radius: 4px;
   transition: opacity 0.2s ease;
   text-transform: uppercase;
+
   /* Reference has uppercase button text */
   width: 100%;
   display: flex;
@@ -630,18 +632,21 @@ h1 {
   border-radius: 6px;
   border: 1px solid #eee;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .channel-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
 }
 
 .icon-box {
   width: 40px;
   height: 40px;
   background-color: #a89f91;
+
   /* Muted brown from reference */
   border-radius: 4px;
   display: flex;
@@ -706,6 +711,7 @@ h1 {
 /* Open To Section */
 .open-to-section {
   background-color: #eeebe6;
+
   /* Beige bg */
   padding: var(--space-5);
   border-radius: 6px;
@@ -736,7 +742,7 @@ h1 {
 }
 
 .open-to-list li::before {
-  content: "•";
+  content: '•';
   position: absolute;
   left: 0;
   color: var(--color-latte);
@@ -787,23 +793,22 @@ h1 {
   }
 }
 
-.btn-submit:hover {
-  opacity: 0.9;
-}
-
 @media (width >=1024px) {
   .content-grid .label {
     grid-column: 1 / 5;
+
     /* Span 4 */
   }
 
   .content-grid .contact-list {
     grid-column: 5 / -1;
+
     /* Span 8 */
   }
 
   .contact-form {
     grid-column: 5 / -1;
+
     /* align with contact list */
   }
 }

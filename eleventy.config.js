@@ -1,6 +1,7 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/style.css');
   eleventyConfig.addPassthroughCopy('src/*.png');
+  eleventyConfig.addPassthroughCopy('src/CNAME');
   return {
     dir: {
       input: 'src',
@@ -9,6 +10,5 @@ module.exports = function (eleventyConfig) {
       output: '_site',
     },
     templateFormats: ['njk', 'md', 'html'],
-    pathPrefix: '/bridget-portfolio/',
   };
 };
